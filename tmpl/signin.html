@@ -1,145 +1,107 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <title>Login - Brand</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i" />
     <link rel="stylesheet" href="assets/css/styles.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css"
-    />
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css" />
+</head>
 
-  <body>
-    <nav
-      class="navbar navbar-light navbar-expand-md clean-navbar"
-      style="
+<body>
+    <nav class="navbar navbar-light navbar-expand-md clean-navbar" style="
         border-radius: 15px;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
         border-bottom-right-radius: 15px;
         border-bottom-left-radius: 15px;
-      "
-    >
-      <div class="container-fluid">
-        <a
-          class="navbar-brand logo"
-          href="#"
-          style="margin-left: 20px; margin-right: 0px"
-          ><img
-            src="https://redprogramacioncompetitiva.com/images/lgo_rpc1.png"
-            style="height: 45px" /></a
-        ><button
-          data-bs-toggle="collapse"
-          class="navbar-toggler"
-          data-bs-target="#collapseNB"
-        >
-          <span class="visually-hidden">Toggle navigation</span
-          ><span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse text-center" id="collapseNB">
-          <label
-            class="
+      ">
+        <div class="container-fluid">
+            <a class="navbar-brand logo" href="#" style="margin-left: 20px; margin-right: 0px"><img
+                    src="https://redprogramacioncompetitiva.com/images/lgo_rpc1.png" style="height: 45px" /></a><button
+                data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#collapseNB">
+                <span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse text-center" id="collapseNB">
+                <label class="
               form-label
               text-center
               d-lg-flex
               mx-auto
               justify-content-lg-center
-            "
-            >RPC : : Red de Programación Competitiva</label
-          >
+            ">RPC : : Red de Programación Competitiva</label>
+            </div>
         </div>
-      </div>
     </nav>
     <main class="page login-page">
-      <section class="clean-block clean-form dark" style="height: 100vh">
-        <div class="container">
-          <div class="block-heading">
-            <h1
-              style="
+        <section class="clean-block clean-form dark" style="height: 100vh">
+            <div class="container">
+                <div class="block-heading">
+                    <h1 style="
                 color: var(--bs-purple);
                 margin-top: 20px;
                 border-top-color: rgb(13, 110, 253);
-              "
-            >
-              Sign In
-            </h1>
-          </div>
-          <form style="border-top-color: var(--bs-purple); border-radius: 15px">
-            <div class="mb-3">
-              <label class="form-label" for="username">Username</label
-              ><input class="form-control" type="text" />
-            </div>
-            <div class="mb-4">
-              <label class="form-label" for="password">Password</label
-              ><input class="form-control" type="password" id="password" />
-            </div>
-            <div class="mb-3" style="text-align: center">
-              <button
-                class="btn btn-primary"
-                type="submit"
-                style="
+              ">
+                        Sign In
+                    </h1>
+                </div>
+                <form action="" method="POST" style="border-top-color: var(--bs-purple); border-radius: 15px">
+                    <div class="mb-3">
+                        <label class="form-label" for="username">Username</label><input class="form-control"
+                            name="username" type="text" />
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label" for="password">Password</label><input class="form-control"
+                            name="password" type="password" id="password" />
+                    </div>
+                    <div class="mb-3" style="text-align: center">
+                        <button class="btn btn-primary" type="submit" style="
                   border-radius: 15px;
                   background: var(--bs-purple);
                   border-style: none;
                   border-top-style: none;
-                "
-              >
-                SIGN IN
-              </button>
+                ">
+                            SIGN IN
+                        </button>
+                    </div>
+                    <div class="mb-1" style="margin-bottom: 0px; text-align: center">
+                        <label class="form-label" style="margin-bottom: 0px; text-align: center; margin-top: 10px">New
+                            user?</label>
+                    </div>
+                    <div style="text-align: center">
+                        <a href="/RPC-Auth/tmpl/signup.html"><button class="btn btn-primary" type="button" style="
+                    border-radius: 15px;
+                    background: rgba(111, 66, 193, 0);
+                    color: var(--bs-purple);
+                    text-align: center;
+                    border-style: solid;
+                    border-color: var(--bs-purple);
+                  ">
+                                SIGN UP
+                            </button>
+                        </a>
+                    </div>
+                </form>
             </div>
-            <div class="mb-1" style="margin-bottom: 0px; text-align: center">
-              <label
-                class="form-label"
-                style="margin-bottom: 0px; text-align: center; margin-top: 10px"
-                >New user?</label
-              >
-            </div>
-            <div style="text-align: center">
-              <button
-                class="btn btn-primary"
-                type="button"
-                style="
-                  border-radius: 15px;
-                  background: rgba(111, 66, 193, 0);
-                  color: var(--bs-purple);
-                  text-align: center;
-                  border-style: solid;
-                  border-color: var(--bs-purple);
-                "
-              >
-                SIGN UP
-              </button>
-            </div>
-          </form>
-        </div>
-      </section>
+        </section>
     </main>
-    <footer
-      class="footer-dark"
-      style="
+    <footer class="footer-dark" style="
         border-radius: 15px;
         border-top-right-radius: 15px;
         border-top-left-radius: 15px;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
-      "
-    >
-      <div class="container">
-        <p class="copyright">RPC : : Red de Programación Competitiva © 2021</p>
-      </div>
+      ">
+        <div class="container">
+            <p class="copyright">RPC : : Red de Programación Competitiva © 2021</p>
+        </div>
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/script.min.js"></script>
-  </body>
+</body>
+
 </html>
