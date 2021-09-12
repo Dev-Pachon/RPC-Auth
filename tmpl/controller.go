@@ -12,6 +12,7 @@ var db *sql.DB
 var err error
 
 func signupPage(res http.ResponseWriter, req *http.Request) {
+
 	if req.Method != "POST" {
 		http.ServeFile(res, req, "signup.html")
 		return
@@ -57,6 +58,34 @@ func signupPage(res http.ResponseWriter, req *http.Request) {
 	}
 }
 
+func signinPage(res http.ResponseWriter, req *http.Request) {
+	if req.Method != "POST" {
+		http.ServeFile(res, req, "signin.html")
+		return
+	}
+
+	username := req.FormValue("username")
+	password := req.FormValue("password")
+
+	var databaseUsername string
+	var databasePassword string
+
+	err := db.QueryRow("SELECT username, password FROM userswithdate WHERE username=?", username).Scan(&databaseUsername, &databasePassword)
+
+	if err != nil {
+		http.Redirect(res, req, "/signin", 301)
+		return
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(databasePassword), []byte(password))
+	if err != nil {
+		http.Redirect(res, req, "/signin", 301)
+		return
+	}
+
+	res.Write([]byte("Hello " + databaseUsername))
+}
+
 
 func homePage(res http.ResponseWriter, req *http.Request) {
 	http.ServeFile(res, req, "index.html")
@@ -75,7 +104,7 @@ func main() {
 	}
 
 	http.HandleFunc("/signup", signupPage)
-	//http.HandleFunc("/signin", loginPage)
+	http.HandleFunc("/signin", signinPage)
 	http.HandleFunc("/", homePage)
 	http.ListenAndServe(":8080", nil)
 }
