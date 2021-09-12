@@ -83,12 +83,14 @@ func signinPage(res http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	res.Write([]byte("Hello " + databaseUsername))
+	//res.Write([]byte("Hello " + databaseUsername))
+	//http.Redirect(res,req,"/home",301)
+	http.ServeFile(res, req, "home.html")
 }
 
 
 func homePage(res http.ResponseWriter, req *http.Request) {
-	http.ServeFile(res, req, "index.html")
+	http.ServeFile(res, req, "home.html")
 }
 
 func main() {
@@ -105,6 +107,6 @@ func main() {
 
 	http.HandleFunc("/signup", signupPage)
 	http.HandleFunc("/signin", signinPage)
-	http.HandleFunc("/", homePage)
+	http.HandleFunc("/", signinPage)
 	http.ListenAndServe(":8080", nil)
 }
