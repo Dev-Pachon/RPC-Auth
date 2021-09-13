@@ -124,7 +124,7 @@ func homePage(res http.ResponseWriter, req *http.Request) {
 	}
 
 	//executing the html with a fill format
-	if err := templates.Execute(res, rows); err != nil {
+	if err := templates.Execute(res, users); err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 	}
 }
