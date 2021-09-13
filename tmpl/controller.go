@@ -46,7 +46,7 @@ func signupPage(res http.ResponseWriter, req *http.Request) {
 				return
 			}
 
-			res.Write([]byte("User created!"))
+			http.Redirect(res, req, "home", 301)
 			return
 
 		case err != nil:
@@ -86,14 +86,12 @@ func signinPage(res http.ResponseWriter, req *http.Request) {
 	}
 
 	http.Redirect(res, req, "home", 301)
-	//http.ServeFile(res, req, "home.html")
 }
 
 func homePage(res http.ResponseWriter, req *http.Request) {
 
 	//Getting data from the database
 	rows, err := db.Query("SELECT username, firstname, lastname, birthdate FROM userswithdate")
-	//rows, err := db.Query("SELECT username, firstname, lastname FROM userswithdate")
 
 	if err != nil {
 		http.Error(res, "Server error, unable to get data from the database1", 500)
@@ -106,24 +104,18 @@ func homePage(res http.ResponseWriter, req *http.Request) {
 	//Filling a arr with the users
 	for rows.Next() {
 		var username, firstname, lastname, birthdate string
-		//var birthdate time.Time
-		//fmt.Printf("Before rows.Scan")
 		err = rows.Scan(&username, &firstname, &lastname, &birthdate)
-		//err = rows.Scan(&username, &firstname, &lastname)
 		
 
 		if err != nil {
 			http.Error(res, "Server error, unable to get data from the database2", 500)
 			return
 		}
-		//fmt.Printf("After rows.Scan")
-
+		
 		user.Username = username
 		user.Firstname = firstname
 		user.Lastname = lastname
 		user.Birthdate = birthdate
-		//fmt.Printf("%s %s %s %s",username,firstname,lastname,birthdate)
-		//fmt.Printf("%s %s %s %s",username,firstname,lastname)
 		users = append(users, user)
 	}
 
@@ -135,7 +127,6 @@ func homePage(res http.ResponseWriter, req *http.Request) {
 
 type User struct {
 	Username, Lastname, Firstname, Birthdate string
-//	Birthdate                     time.Time
 }
 
 func main() {
