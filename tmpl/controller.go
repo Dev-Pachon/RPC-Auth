@@ -29,7 +29,7 @@ func signupPage(res http.ResponseWriter, req *http.Request) {
 
 	var user string
 
-	err := db.QueryRow("SELECT username FROM userswithdate WHERE username=?", username).Scan(&user)
+	err := db.QueryRow("SELECT username FROM users WHERE username=?", username).Scan(&user)
 
 	if password == confirmpassword {
 		switch {
@@ -40,7 +40,7 @@ func signupPage(res http.ResponseWriter, req *http.Request) {
 				return
 			}
 
-			_, err = db.Exec("INSERT INTO userswithdate(username, password, firstname, lastname,birthdate) VALUES(?, ?, ?, ?,?)", username, hashedPassword, firstname, lastname, birthdate)
+			_, err = db.Exec("INSERT INTO users(username, password, firstname, lastname,birthdate) VALUES(?, ?, ?, ?,?)", username, hashedPassword, firstname, lastname, birthdate)
 			if err != nil {
 				http.Error(res, "Server error, unable to create your account.2", 500)
 				return
@@ -72,7 +72,7 @@ func signinPage(res http.ResponseWriter, req *http.Request) {
 	var databaseUsername string
 	var databasePassword string
 
-	err := db.QueryRow("SELECT username, password FROM userswithdate WHERE username=?", username).Scan(&databaseUsername, &databasePassword)
+	err := db.QueryRow("SELECT username, password FROM users WHERE username=?", username).Scan(&databaseUsername, &databasePassword)
 
 	if err != nil {
 		http.Redirect(res, req, "/signin", 301)
@@ -91,7 +91,7 @@ func signinPage(res http.ResponseWriter, req *http.Request) {
 func homePage(res http.ResponseWriter, req *http.Request) {
 
 	//Getting data from the database
-	rows, err := db.Query("SELECT username, firstname, lastname, birthdate FROM userswithdate")
+	rows, err := db.Query("SELECT username, firstname, lastname, birthdate FROM users")
 
 	if err != nil {
 		http.Error(res, "Server error, unable to get data from the database1", 500)
