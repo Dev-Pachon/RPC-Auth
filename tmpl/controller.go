@@ -1,15 +1,18 @@
 package main
 
-import "database/sql"
-import _ "github.com/go-sql-driver/mysql"
+import (
+	"database/sql"
+	"html/template"
+	"net/http"
+	"time"
 
-import "golang.org/x/crypto/bcrypt"
-
-import "net/http"
-
+	_ "github.com/go-sql-driver/mysql"
+	"golang.org/x/crypto/bcrypt"
+)
 
 var db *sql.DB
 var err error
+var templates = template.Must(template.ParseFiles("home.html"))
 
 func signupPage(res http.ResponseWriter, req *http.Request) {
 
@@ -29,8 +32,8 @@ func signupPage(res http.ResponseWriter, req *http.Request) {
 
 	err := db.QueryRow("SELECT username FROM userswithdate WHERE username=?", username).Scan(&user)
 
-	if password == confirmpassword{
-		switch{
+	if password == confirmpassword {
+		switch {
 		case err == sql.ErrNoRows:
 			hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 			if err != nil {
@@ -38,22 +41,22 @@ func signupPage(res http.ResponseWriter, req *http.Request) {
 				return
 			}
 
-			_, err = db.Exec("INSERT INTO userswithdate(username, password, firstname, lastname,birthdate) VALUES(?, ?, ?, ?,?)", username, hashedPassword,firstname,lastname,birthdate)
+			_, err = db.Exec("INSERT INTO userswithdate(username, password, firstname, lastname,birthdate) VALUES(?, ?, ?, ?,?)", username, hashedPassword, firstname, lastname, birthdate)
 			if err != nil {
 				http.Error(res, "Server error, unable to create your account.2", 500)
 				return
 			}
 
 			res.Write([]byte("User created!"))
-		return
-		
+			return
+
 		case err != nil:
 			http.Error(res, "Server error, unable to create your account.3", 500)
-		return
+			return
 		default:
 			http.Redirect(res, req, "/", 301)
 		}
-	}else{
+	} else {
 		res.Write([]byte("Passwords do not match"))
 	}
 }
@@ -88,9 +91,47 @@ func signinPage(res http.ResponseWriter, req *http.Request) {
 	http.ServeFile(res, req, "home.html")
 }
 
-
 func homePage(res http.ResponseWriter, req *http.Request) {
-	http.ServeFile(res, req, "home.html")
+
+	//Getting data from the database
+	rows, err := db.Query("SELECT username, firstname, lastname, birthdate FROM userswithdate")
+
+	if err != nil {
+		http.Error(res, "Server error, unable to get data from the database", 500)
+		return
+	}
+
+	user := User{}
+	users := []User{}
+
+	//Filling a arr with the users
+	for rows.Next() {
+		var username, firstname, lastname string
+		var birthdate time.Time
+
+		err = rows.Scan(&username, &firstname, &lastname, &birthdate)
+
+		if err != nil {
+			http.Error(res, "Server error, unable to get data from the database", 500)
+			return
+		}
+
+		user.Username = username
+		user.Firstname = firstname
+		user.Lastname = lastname
+		user.Birthdate = birthdate
+		users = append(users, user)
+	}
+
+	//executing the html with a fill format
+	if err := templates.Execute(res, rows); err != nil {
+		http.Error(res, err.Error(), http.StatusInternalServerError)
+	}
+}
+
+type User struct {
+	Username, Lastname, Firstname string
+	Birthdate                     time.Time
 }
 
 func main() {
