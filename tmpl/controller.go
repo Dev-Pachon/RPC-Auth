@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"html/template"
 	"net/http"
-	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 	"golang.org/x/crypto/bcrypt"
@@ -117,13 +116,13 @@ func homePage(res http.ResponseWriter, req *http.Request) {
 			http.Error(res, "Server error, unable to get data from the database2", 500)
 			return
 		}
-		fmt.Printf("After rows.Scan")
+		//fmt.Printf("After rows.Scan")
 
 		user.Username = username
 		user.Firstname = firstname
 		user.Lastname = lastname
 		user.Birthdate = birthdate
-		fmt.Printf("%s %s %s %s",username,firstname,lastname,birthdate)
+		//fmt.Printf("%s %s %s %s",username,firstname,lastname,birthdate)
 		//fmt.Printf("%s %s %s %s",username,firstname,lastname)
 		users = append(users, user)
 	}
