@@ -10,7 +10,7 @@ go get golang.org/x/crypto/bcrypt
 go get github.com/go-sql-driver/mysql
 ```
 
-Also, you must have installed MySQL, and create a new table in your local database using the following command:
+Also, you must have installed MySQL and Go, and create a new table in your local database using the following command:
 
 ```
 CREATE TABLE users(
@@ -32,3 +32,19 @@ db, err = sql.Open("mysql", "myUsername:myPassword@/myDatabase")
 ```
 
 [This is how you check your username and password if you're using XAMPP.](https://www.javierrguez.com/recuperar-contrasena-de-phpmyadmin-con-xampp/)
+
+## How to run
+
+To run the program, open your powershell or cmd in the folder tmpl of the project, and type this command:
+
+```
+go build
+```
+
+And then this one
+
+```
+controller
+```
+
+Finally, open your browser and go to http://localhost:8080/home
