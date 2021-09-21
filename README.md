@@ -33,6 +33,7 @@ db, err = sql.Open("mysql", "myUsername:myPassword@/myDatabase")
 
 [This is how you check your username and password if you're using XAMPP.](https://www.javierrguez.com/recuperar-contrasena-de-phpmyadmin-con-xampp/)
 
+
 ## How to run
 
 To run the program, open your powershell or cmd in the folder tmpl of the project, and type this command:
