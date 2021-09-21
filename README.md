@@ -23,7 +23,7 @@ CREATE TABLE users(
 );
 ```
 
-Inside of the file of signup.go replace in the line 133 with your own credentials:
+Inside of the file of controller.go replace in the line 133 with your own credentials:
 
 ```
 db, err = sql.Open("mysql", "<root>:<password>@/<dbname>")
